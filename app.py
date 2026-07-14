@@ -244,11 +244,11 @@ st.markdown(f"""
 # --- DASHBOARD PAGE ---
 if menu_choice == "📊 Dashboard Overview":
     st.subheader("System Performance & Metrics")
-    
+
     # Calculate values
     patient_list = st.session_state.patients.get_all_patients()
     doctor_list = st.session_state.doctors.get_all_doctors()
-    
+
     total_patients = len(patient_list)
     total_doctors = len(doctor_list)
     available_beds = st.session_state.beds.total_beds - st.session_state.beds.occupied_beds
@@ -276,7 +276,7 @@ if menu_choice == "📊 Dashboard Overview":
             st.dataframe(df_patients, use_container_width=True, hide_index=True)
         else:
             st.info("No patient records registered yet.")
-            
+
     with right_col:
         st.markdown("#### Doctor Availability Status")
         if doctor_list:
@@ -289,14 +289,14 @@ if menu_choice == "📊 Dashboard Overview":
 # --- PATIENT RECORDS PAGE ---
 elif menu_choice == "📋 Patient Records":
     st.subheader("Patient Database")
-    
+
     tab1, tab2, tab3 = st.tabs(["View Records", "Add Patient", "Delete Patient"])
-    
+
     with tab1:
         patient_list = st.session_state.patients.get_all_patients()
         if patient_list:
             df_patients = pd.DataFrame(patient_list)
-            
+
             # Simple search filter
             search_query = st.text_input("🔍 Search patients by name or disease:", "")
             if search_query:
@@ -322,7 +322,7 @@ elif menu_choice == "📋 Patient Records":
             with col2:
                 p_age = st.number_input("Age", min_value=0, max_value=120, value=30)
                 p_disease = st.text_input("Disease/Department", placeholder="e.g. Cardiology, Orthopedics")
-                
+
             submitted = st.form_submit_button("Add Patient Record")
             if submitted:
                 if not p_name or not p_disease:
@@ -332,7 +332,7 @@ elif menu_choice == "📋 Patient Records":
                 else:
                     st.session_state.patients.add_patient(p_id, p_name, p_age, p_disease)
                     st.success(f"Patient '{p_name}' added successfully!")
-                    
+
     with tab3:
         st.write("### Delete Patient Record")
         patient_list = st.session_state.patients.get_all_patients()
@@ -344,7 +344,7 @@ elif menu_choice == "📋 Patient Records":
                 options=df_patients["ID"].tolist(),
                 format_func=lambda x: f"ID {x} - {df_patients[df_patients['ID']==x]['Name'].values[0]}"
             )
-            
+
             if st.button("Delete Patient", type="primary"):
                 success, msg = st.session_state.patients.delete_patient(delete_option)
                 if success:
@@ -360,9 +360,9 @@ elif menu_choice == "📋 Patient Records":
 # --- DOCTOR REGISTRY PAGE ---
 elif menu_choice == "🩺 Doctor Registry":
     st.subheader("Doctors Directory")
-    
+
     tab1, tab2 = st.tabs(["Active Doctors", "Add Doctor"])
-    
+
     with tab1:
         doctor_list = st.session_state.doctors.get_all_doctors()
         if doctor_list:
@@ -371,7 +371,7 @@ elif menu_choice == "🩺 Doctor Registry":
             st.caption(f"Showing {len(df_doctors)} registered doctors.")
         else:
             st.info("No doctors registered in the system.")
-            
+
     with tab2:
         st.write("### Add Doctor Profile")
         with st.form("add_doctor_form", clear_on_submit=True):
@@ -382,7 +382,7 @@ elif menu_choice == "🩺 Doctor Registry":
             with col2:
                 d_spec = st.text_input("Specialization", placeholder="e.g. Neurology, Oncology")
                 d_avail = st.selectbox("Availability", ["Yes", "No"])
-                
+
             submitted = st.form_submit_button("Register Doctor")
             if submitted:
                 if not d_name or not d_spec:
@@ -399,7 +399,7 @@ elif menu_choice == "🩺 Doctor Registry":
 # --- BED MANAGEMENT PAGE ---
 elif menu_choice == "🛏️ Bed Management":
     st.subheader("Hospital Bed Status & Allocation")
-    
+
     # Bed metrics
     total = st.session_state.beds.total_beds
     occupied = st.session_state.beds.occupied_beds
@@ -430,7 +430,7 @@ elif menu_choice == "🛏️ Bed Management":
             "Select Patient to Admit",
             options=list(patient_options.keys())
         )
-        
+
         if st.button("🚪 Admit Selected Patient", type="primary", use_container_width=True):
             patient_data = patient_options[selected_option]
             success, msg = st.session_state.beds.admit_patient(patient_data["Name"], patient_data["Disease"])
@@ -454,14 +454,14 @@ elif menu_choice == "🛏️ Bed Management":
         bed = st.session_state.beds.beds[i]
         is_occupied = bed["is_occupied"]
         color = "#ef4444" if is_occupied else "#22c55e"
-        
+
         if is_occupied:
             status = f"Occupied by:<br><b>{bed['patient_name']}</b><br><span style='font-size:0.8em;opacity:0.9;'>Disease: {bed['disease']}</span>"
             icon = "🛌"
         else:
             status = "Available"
             icon = "🟢"
-        
+
         with cols[i % 5]:
             st.markdown(
                 f"""
