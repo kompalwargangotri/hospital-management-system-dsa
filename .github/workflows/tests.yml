@@ -1,0 +1,31 @@
+name: Hospital Management Validation
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  repository-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: requirements-dev.txt
+      - name: Install test dependency
+        run: python -m pip install -r requirements-dev.txt
+      - name: Validate Python syntax
+        run: python -m py_compile app.py tests/test_repository.py
+      - name: Compile C++ application
+        run: g++ -std=c++11 -Wall -Wextra -pedantic cpp/hospital_management.cpp -o hospital_management
+      - name: Run repository tests
+        run: python -m pytest tests -v
