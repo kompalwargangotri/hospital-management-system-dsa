@@ -370,3 +370,11 @@ The workflow runs for:
 ## Repository
 
 [Hospital Management System — DSA](https://github.com/kompalwargangotri/hospital-management-system-dsa)
+
+## Author
+
+**Gangotri Kompalwar**
+
+- GitHub: [kompalwargangotri](https://github.com/kompalwargangotri)
+
+- LinkedIn: [Gangotri Kompalwar](https://www.linkedin.com/in/gangotri-kompalwar-4635b9359)
