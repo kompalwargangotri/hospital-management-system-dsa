@@ -379,4 +379,4 @@ The workflow runs for:
 
 - LinkedIn: [Gangotri Kompalwar](https://www.linkedin.com/in/gangotri-kompalwar-4635b9359)
 
-- Portfolio: (https://kompalwargangotri.github.io/)
+- Portfolio: [Gangotri Kompalwar](https://kompalwargangotri.github.io/)
