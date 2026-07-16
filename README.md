@@ -375,8 +375,10 @@ The workflow runs for:
 
 **Gangotri Kompalwar**
 
-- GitHub: [kompalwargangotri](https://github.com/kompalwargangotri)
+- [GitHub](https://github.com/kompalwargangotri)
+  
+- [LinkedIn](https://www.linkedin.com/in/gangotri-kompalwar-4635b9359)
 
-- LinkedIn: [Gangotri Kompalwar](https://www.linkedin.com/in/gangotri-kompalwar-4635b9359)
-
-- Portfolio: [Gangotri Kompalwar](https://kompalwargangotri.github.io/)
+- [Portfolio](https://kompalwargangotri.github.io/)
+  
+- [Email](mailto:kompalwargangotri@gmail.com)
